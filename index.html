@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phanlum</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="icon" href="l3.png" type="image/png">
+
+    <style>
+        @font-face {
+            font-family: 'Minecraft';
+            src: url('minecraft.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --ghost-white: #F8F8FF;
+            --lime-green: #8afa6e;
+            --deep-charcoal: #2D2D2D;
+            --nav-height: 70px;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Comfortaa', system-ui, -apple-system, sans-serif;
+            color: var(--deep-charcoal);
+            line-height: 1.6;
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            background-color: #F8F8FF;
+            background-image: linear-gradient(rgba(49, 203, 0, 0.035) 1px, transparent 1px);
+            background-size: 100% 22px;
+            cursor: none;
+        }
+
+        /* --- TOP BAR STYLES --- */
+        #top-bar {
+            position: fixed;
+            top: -100px; /* Hidden by default */
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background-color: rgba(248, 248, 255, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #top-bar.active {
+            top: 0;
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--deep-charcoal);
+        }
+
+        .nav-home-btn {
+            background-color: var(--lime-green);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(49, 203, 0, 0.2);
+            cursor: none;
+        }
+
+        .nav-home-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(49, 203, 0, 0.3);
+        }
+        
+        #custom-cursor {
+            position: fixed;
+            width: 25px;
+            height: 25px;
+            background: url('cursor.svg') no-repeat center / contain;
+            pointer-events: none;
+            z-index: 9999;
+            display: none;
+        }
+
+        #full-background, #full-background2 {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.85s ease;
+        }
+        #full-background { z-index: -2; }
+        #full-background2 { z-index: -3; }
+
+        #full-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            background-color: rgba(248, 248, 255, 0.78);
+            transition: background-color 0.85s ease;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 1.4s ease;
+        }
+
+        h1, h2 { font-weight: 700; color: var(--deep-charcoal); }
+        h1 { font-size: 3.2rem; margin-bottom: 20px; text-align: center; }
+
+        #intro, #profile, #closing {
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0px 20px 0px;
+        }
+        
+        .section { margin-bottom: 110px; position: relative; z-index: 2; }
+                #about-me-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: 40px;
+        }
+
+        .about-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .interest-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        .interest-row span { color: var(--lime-green); font-size: 1.5rem; }
+
+        .about-middle {
+            flex: 1;
+            text-align: center;
+            font-size: 1.5rem;
+            line-height: 1.4;
+        }
+        #local-time {
+            display: block;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--lime-green);
+            margin: 10px 0;
+        }
+
+        .about-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .profile-img {
+            width: 240px;
+            height: 240px;
+            border-radius: 40px;
+            object-fit: cover;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        .social-icons {
+            display: flex;
+            gap: 8px;
+        }
+        .social-icon-btn {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.2s ease;
+            cursor: none;
+        }
+        .social-icon-btn:hover { transform: translateY(-5px); }
+        .social-icon-btn img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            border-radius: 12px;
+        }
+
+        #minecraft .minecraft-left h1,
+        #minecraft .minecraft-list li,
+        #minecraft .minecraft-list li span.highlight {
+            font-family: 'Minecraft', 'Pixelify Sans', 'Courier New', monospace !important;
+            text-transform: none;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        #minecraft {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            align-items: flex-start;
+            margin-bottom: 110px;
+        }
+        .minecraft-left { flex: 1; min-width: 320px; }
+        .minecraft-right { flex: 1; min-width: 320px; }
+
+        .minecraft-left h1 {
+            text-align: left;
+            font-size: 2.6rem;
+            color: var(--lime-green);
+            margin-bottom: 35px;
+            text-shadow: 0 20px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .minecraft-list {
+            list-style: none;
+            padding-left: 10px;
+        }
+        .minecraft-list li {
+            margin: 18px 0;
+            font-size: 1.25rem;
+            position: relative;
+            padding-left: 34px;
+        }
+        .minecraft-list li:before {
+            content: "■";
+            color: var(--lime-green);
+            position: absolute;
+            left: 0;
+        }
+
+        .separator {
+            text-align: center;
+            margin: 60px 0;
+            color: var(--lime-green);
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+        }
+        
+        .interests {
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 20px; 
+            justify-content: center; 
+            margin: 30px 0;
+            padding: 100px 20px 200px;
+        }
+        
+        .interest-item {
+            background-color: white;
+            padding: 16px 28px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            font-size: 1.15rem;
+            display: flex; align-items: center; gap: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .interest-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(49, 203, 0, 0.2);
+        }
+
+        .project-card {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            border-radius: 28px;
+            padding: 38px 36px;
+            margin-bottom: 42px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            cursor: none;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(248, 248, 255, var(--card-opacity, 0.84));
+            z-index: 1;
+            border-radius: 28px;
+        }
+        
+        .project-card > * { position: relative; z-index: 2; }
+        
+        .project-card .project-image {
+            position: absolute;
+            right: 36px;
+            top: 50%;
+            transform: translateY(-50%);
+            object-fit: cover;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .project-card .project-image:hover {
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        /* Individual image controls */
+        .project-image.i1 {
+            width: 300px;
+            height: 120px;
+            border-radius: 16px;
+            right: 36px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .project-image.i2 {
+            width: 510px;
+            height: 200px;
+            border-radius: 20px;
+            right: 36px;
+            top: 70%;
+            transform: translateY(-50%);
+        }
+        
+        .project-image.i3 {
+            width: 110px;
+            height: 110px;
+            border-radius: 12px;
+            right: 36px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(49, 203, 0, 0.18);
+        }
+
+        .smp-card {
+            display: flex; 
+            align-items: center; 
+            gap: 15px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            border-radius: 35px;
+            background-color: rgba(255, 255, 255, var(--card-opacity, 1));
+            box-shadow: 0 10px 30px rgba(0,0,0,0.09);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 500px;
+            cursor: none;
+        }
+        
+        .smp-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 18px 45px rgba(49, 203, 0, 0.22); 
+        }
+        
+        .smp-text { flex: 1; }
+
+        .smp-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 20px;
+            flex-shrink: 0;
+        }
+
+        .project-title { color: var(--deep-charcoal); font-size: 1.7rem; margin-bottom: 16px; }
+        .highlight { color: var(--lime-green); font-weight: 600; }
+        
+        .closing { font-size: 2.5rem; color: var(--deep-charcoal); }
+        
+        .logo {
+            width: 190px;
+            margin-bottom: 40px;
+            filter: drop-shadow(0 10px 25px rgba(0,0,0,0.12));
+        }
+    </style>
+</head>
+<body>
+    <nav id="top-bar">
+        <div class="nav-logo">Phanlum</div>
+        <a href="#" class="nav-home-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">Home</a>
+    </nav>
+
+    <div id="full-background"></div>
+    <div id="full-background2"></div>
+    <div id="full-overlay"></div>
+    <canvas id="particle-canvas"></canvas>
+    <div id="custom-cursor"></div>
+
+    <div class="section" id="intro">
+        <img src="l0.png" alt="Phanlum Logo" class="logo">
+        <h1>Phanlum</h1>
+        <div class="intro-text">
+            <p><strong>Phans - Phanlum</strong></p>
+            <p>How delightful to cross paths!</p>
+        </div>
+    </div>
+    
+    <div class="section" id="profile">
+        <div style="font-size: 1.45rem; line-height: 2; max-width: 720px; color: var(--ghost-white);">
+            • –｛ ENTP-T || DWARF || 🇭🇰 Hong Kong ｝– •<br><br>
+            ᴜɴ ᴛᴜᴛᴛᴏꜰᴀʀᴇ, ᴍᴀ ɴᴏɴ ᴇ̀ ᴇꜱᴘᴇʀᴛᴏ ᴅɪ ɴᴜʟʟᴀ.
+        </div>
+    </div>
+    
+    <div class="section" id="about-me">
+        <div id="about-me-container">
+            <div class="about-left">
+                <div class="interest-row"><span>✧</span> Programming 💻</div>
+                <div class="interest-row"><span>✧</span> Volleyball 🏐</div>
+                <div class="interest-row"><span>✧</span> Chess ♟️</div>
+                <div class="interest-row"><span>✧</span> Clarinet 🎵</div>
+                <div class="interest-row"><span>✧</span> Martial arts 👊🏼</div>
+                <div class="interest-row"><span>✧</span> Languages 🔤</div>
+            </div>
+
+            <div class="about-middle">
+                It is currently
+                <span id="local-time">12:00 PM</span>
+                in my timezone.
+            </div>
+
+            <div class="about-right">
+                <img src="me.png" alt="Me" class="profile-img">
+                <div class="social-icons">
+                    <a href="https://instagram.com/_phanlum" target="_blank" class="social-icon-btn"><img src="ig.png" alt="Instagram"></a>
+                    <a href="https://www.threads.com/@phanlum.leung" target="_blank" class="social-icon-btn"><img src="threads.png" alt="Threads"></a>
+                    <a href="https://www.tumblr.com/blog/adriandaaisihing" target="_blank" class="social-icon-btn"><img src="tumblr.png" alt="Tumblr"></a>
+                    <a href="https://discord.com" target="_blank" class="social-icon-btn"><img src="discord.png" alt="Discord"></a>
+                    <a href="https://www.planetminecraft.com/member/phanlum/" target="_blank" class="social-icon-btn"><img src="pmc.png" alt="PlanetMinecraft"></a>
+                    <a href="https://modrinth.com/user/phanlumleung" target="_blank" class="social-icon-btn"><img src="modrinth.png" alt="Modrinth"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="separator">-ˋˏ✄════════════════════════</div>
+    
+    <div class="section" id="minecraft">
+        <div class="minecraft-left">
+            <img src="head.png" alt="Minecraft Head" style="width: 120px; height: 120px; margin-bottom: 20px;">
+            <h1>Minecraft nerd</h1>
+            <ul class="minecraft-list">
+                <li>Studies the Minecraft Wiki</li>
+                <li>Codes Minecraft datapacks / mods</li>
+                <li>Learning to code plugins</li>
+                <li>Draws skins</li>
+                <li>Makes resource packs</li>
+                <li><span class="highlight">Commission open</span> <3</li>
+            </ul>
+        </div>
+        
+        <div class="minecraft-right">
+            <div class="smp-card" style="--card-opacity: 0.98;">
+                <div class="smp-text">
+                    <div class="project-title">A Nether SMP</div>
+                    <p>1.18 Nether-themed SMP</p>
+                    <p>June 2022 - September 2022</p>
+                </div>
+                <img src="m1.png" alt="Nether SMP" class="smp-image">
+            </div>
+            <div class="smp-card" style="--card-opacity: 0.96;">
+                <div class="smp-text">
+                    <div class="project-title">An Arctic SMP</div>
+                    <p>1.19-1.21.8 Arctic survival SMP</p>
+                    <p>November 2022 - July 2025</p>
+                </div>
+                <img src="m2.png" alt="Arctic SMP" class="smp-image">
+            </div>
+            <div class="smp-card" style="--card-opacity: 0.94;">
+                <div class="smp-text">
+                    <div class="project-title">A Lifesteal SMP</div>
+                    <p>1.21 Failed Lifesteal SMP</p>
+                    <p>August 2025</p>
+                </div>
+                <img src="m3.png" alt="Lifesteal SMP" class="smp-image">
+            </div>
+        </div>
+    </div>
+
+    <div class="separator">-ˋˏ✄════════════════════════</div>
+    
+    <div class="section" id="current-projects">
+        <h1 style="font-size: 2.4rem; text-align: center; color: var(--lime-green);">Current Projects</h1>
+        <div class="project-card" style="background-image: url('p1.png'); --card-opacity: 0.84;" onclick="window.open('https://sites.google.com/view/mcthera', '_blank')">
+            <div class="project-title">Founder of Thera</div>
+            <p><strong>Unique Minecraft creative server</strong></p>
+            <p style="margin-top: 12px; color: var(--deep-charcoal);">Coming 2027</p>
+            <img src="i1.png" alt="Thera Project" class="project-image i1">
+        </div>
+        <div class="project-card" style="background-image: url('p2.png'); --card-opacity: 0.78;" onclick="window.open('https://google.com', '_blank')">
+            <div class="project-title">R e e d i c u l o u s</div>
+            <img src="i2.png" alt="Reediculous Band" class="project-image i2">
+            <p>A little band of mine</p>
+            <p style="margin: 15px 0 8px;">♬⋆.˚ Yearly performance at Christmas</p>
+            <p>♬⋆.˚ Performance on special occasion</p>
+            <p style="margin-top: 20px;"><strong>Instruments:</strong></p>
+            <p>𝄞 Clarinet</p>
+            <p>𝄞 Double Bass</p>
+            <p>𝄞 Percussions</p>
+            <p style="margin-top: 20px;">2026 - Now</p>
+            <p><strong>Performances so far :</strong></p>
+            <p>21/12/2025 Christmas party</p>
+        </div>
+    </div>
+    
+    <div class="separator">-ˋˏ✄════════════════════════</div>
+    
+    <div class="section" id="past-aniani">
+        <h1 style="font-size: 2.4rem; text-align: center; color: var(--lime-green);">Past Projects</h1>
+        <div class="project-card" style="background-image: url('p3.png'); --card-opacity: 0.8;" onclick="window.open('https://www.instagram.com/aniani_shop_2024/', '_blank')">
+            <div class="project-title">AniAni 2024</div>
+            <p>A little business as school project</p>
+            <p>A represents ALPHA🔥</p>
+            <p>N represents NIMBLE✨</p>
+            <p>I represents ILLUSTRIOUS 🌟</p>
+            <p style="margin-top: 20px;">帆布袋（Q 版動物圖案）</p>
+            <p>鎖匙扣（2次元人物）</p>
+            <p style="margin-top: 15px; font-style: italic;">unique✰‧ ₊˚🐈‍⬛ ⊹✭˚</p>
+        </div>
+    </div>
+
+    <div class="separator">-ˋˏ✄════════════════════════</div>
+    
+    <div class="section" id="closing">
+        <div class="closing">
+            Until we meet again.
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 0px; opacity: 0.7; font-size: 0.95rem;">
+        Copyright © 2026 Phanlum All rights reserved.
+    </div>
+
+    <script>
+        // Elements
+        const cursor = document.getElementById('custom-cursor');
+        const topBar = document.getElementById('top-bar');
+        const bg1 = document.getElementById('full-background');
+        const bg2 = document.getElementById('full-background2');
+        const overlay = document.getElementById('full-overlay');
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Cursor Logic
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorVisible = false;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = `${mouseX}px`;
+            cursor.style.top = `${mouseY}px`;
+            if (!cursorVisible) {
+                cursor.style.display = 'block';
+                cursorVisible = true;
+            }
+        });
+
+        // Time Update Logic
+        function updateLocalTime() {
+            const now = new Date();
+            const utc8Time = new Date(now.getTime() + (8 * 60 * 60 * 1000)); // Add 8 hours for UTC+8
+            const timeString = utc8Time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
+            document.getElementById('local-time').textContent = timeString;
+        }
+        updateLocalTime();
+        setInterval(updateLocalTime, 1000);
+
+        // Top Bar Visibility Logic
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                topBar.classList.add('active');
+            } else {
+                topBar.classList.remove('active');
+            }
+        });
+
+        // Background System
+        let currentBgElement = bg1;
+        let nextBgElement = bg2;
+        let currentImage = null;
+
+        const sectionMap = {
+            'intro':            { image: null, opacity: 1 },
+            'profile':          { image: 'b1.png', opacity: 0 },
+            'about-me':         { image: 'b2.png', opacity: 0.7 },
+            'minecraft':        { image: 'b3.png', opacity: 0.7 },
+            'current-projects': { image: 'b5.png', opacity: 0.9 },
+            'past-aniani':      { image: 'b6.png', opacity: 0.9 },
+            'closing':          { image: null, opacity: 1 }
+        };
+
+        function setBackground(filename, opacity) {
+            if (currentImage === filename) return;
+            if (!filename) {
+                bg1.style.opacity = '0';
+                bg2.style.opacity = '0';
+                currentImage = null;
+                return;
+            }
+            const newUrl = `${filename}`;
+            [currentBgElement, nextBgElement] = [nextBgElement, currentBgElement];
+            nextBgElement.style.backgroundImage = `url('${newUrl}')`;
+            nextBgElement.style.opacity = '1';
+            overlay.style.backgroundColor = `rgba(248, 248, 255, ${opacity})`;
+            currentBgElement.style.opacity = '0';
+            currentImage = filename;
+        }
+
+        const mainSections = ['intro', 'profile', 'about-me', 'minecraft', 'current-projects', 'past-aniani', 'closing'];
+
+        const observer = new IntersectionObserver((entries) => {
+            let best = null;
+            let bestRatio = -1;
+            entries.forEach(entry => {
+                if (entry.intersectionRatio > bestRatio) {
+                    bestRatio = entry.intersectionRatio;
+                    best = entry.target.id;
+                }
+            });
+            if (best) {
+                const config = sectionMap[best];
+                if (config) setBackground(config.image, config.opacity);
+            }
+        }, {
+            threshold: [0.4, 0.6, 0.75],
+            rootMargin: '-20% 0px -25% 0px'
+        });
+
+        mainSections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+
+        // ==================== PARTICLE SYSTEM ====================
+        let particles = [];
+        let w, h;
+        let pImage = new Image();
+        pImage.src = 'l1.png';
+
+        function shouldShowParticles() {
+            const scrollY = window.scrollY;
+            const winH = window.innerHeight;
+            const docH = document.documentElement.scrollHeight;
+            return (scrollY < winH * 0.65) || ((scrollY + winH) > (docH - winH * 0.65));
+        }
+
+        function updateParticlesVisibility() {
+            canvas.style.opacity = shouldShowParticles() ? '0.9' : '0';
+        }
+
+        window.addEventListener('scroll', updateParticlesVisibility);
+        window.addEventListener('resize', updateParticlesVisibility);
+
+        updateParticlesVisibility(); // Set initial visibility
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * w;
+                this.y = Math.random() * h * 1.4;
+                this.vx = (Math.random() - 0.5) * 1.5;
+                this.vy = 1.5 + Math.random() * 2.5;
+                this.size = 8 + Math.random() * 22;
+                this.alpha = 0;
+                this.targetAlpha = 0.4 + Math.random() * 0.55;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotSpeed = (Math.random() - 0.5) * 0.08;
+                this.color = ['#31CB00', '#8FFF6E', '#C1FFC0'][Math.floor(Math.random() * 3)];
+                // Removed 'note' from the pool
+                this.type = Math.random() < 0.3 ? 'p' : ['circle', 'square', 'triangle'][Math.floor(Math.random() * 3)];
+                this.life = 350 + Math.random() * 300;
+            }
+            update() {
+                let dx = this.x - mouseX;
+                let dy = this.y - mouseY;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 180) {
+                    let force = (180 - distance) / 180;
+                    this.vx += (dx / distance) * force * 1.2;
+                    this.vy += (dy / distance) * force * 1.2;
+                }
+                this.x += this.vx; this.y += this.vy;
+                this.vx *= 0.94; this.vy *= 0.94; this.vy += 0.08;
+                this.rotation += this.rotSpeed;
+                if (this.alpha < this.targetAlpha) this.alpha += 0.025;
+                this.alpha -= 0.003;
+                this.life--;
+                if (this.life <= 0 || this.alpha < 0.02 || this.y > h + 200) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.fillStyle = this.color;
+                if (this.type === 'p' && pImage.complete) {
+                    ctx.drawImage(pImage, -this.size / 1.7, -this.size / 1.7, this.size * 1.3, this.size * 1.3);
+                } else if (this.type === 'circle') {
+                    ctx.beginPath(); ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2); ctx.fill();
+                } else if (this.type === 'square') {
+                    ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+                } else if (this.type === 'triangle') {
+                    // Equilateral Triangle Math
+                    const r = this.size / 2;
+                    ctx.beginPath();
+                    ctx.moveTo(0, -r); // Top point
+                    ctx.lineTo(r * 0.866, r * 0.5); // Bottom right (cos 30°, sin 30°)
+                    ctx.lineTo(-r * 0.866, r * 0.5); // Bottom left
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        function resizeCanvas() {
+            w = window.innerWidth; h = window.innerHeight;
+            canvas.width = w; canvas.height = h;
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, w, h);
+            if (particles.length < 140) {
+                for (let i = 0; i < 6; i++) particles.push(new Particle());
+            }
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        animate();
+    </script>
+</body>
+</html>
