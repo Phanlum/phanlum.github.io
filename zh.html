@@ -400,7 +400,7 @@
 <body>
     <nav id="top-bar">
         <div class="nav-logo">Phanlum</div>
-        <a href="#" class="nav-home-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">首頁</a>
+        <a href="https://phanlum.github.io/" class="nav-home-btn" style="font-size: 1.1rem;">🌐</a>
     </nav>
 
     <div id="full-background"></div>
@@ -582,6 +582,14 @@
             }
         });
 
+        document.addEventListener('mousedown', () => {
+            cursor.style.transform = 'scale(0.8)';
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.style.transform = 'scale(1)';
+        });
+
         // Time Update Logic
         function updateLocalTime() {
             const now = new Date();
@@ -595,6 +603,18 @@
         // Top Bar Visibility Logic
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
+                topBar.classList.add('active');
+            } else if (mouseY < 100) {
+                topBar.classList.add('active');
+            } else {
+                topBar.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (window.scrollY > 100) {
+                topBar.classList.add('active');
+            } else if (e.clientY < 100) {
                 topBar.classList.add('active');
             } else {
                 topBar.classList.remove('active');
