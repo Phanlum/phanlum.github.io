@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KCJ0974XW"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -48,10 +47,9 @@
             cursor: none;
         }
 
-        /* --- TOP BAR STYLES --- */
         #top-bar {
             position: fixed;
-            top: -100px; /* Hidden by default */
+            top: -100px;
             left: 0;
             width: 100%;
             height: var(--nav-height);
@@ -360,7 +358,72 @@
             transform: translateY(-50%);
         }
         
+        .cert-badge {
+            width: 160px;
+            height: 160px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
         .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(49, 203, 0, 0.18);
+        }
+
+        .ach-card {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            border-radius: 28px;
+            padding: 38px 36px;
+            margin-bottom: 42px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            cursor: none;
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+        }
+        
+        .ach-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(248, 248, 255, var(--card-opacity, 0.84));
+            z-index: 1;
+            border-radius: 28px;
+        }
+        
+        .ach-card > * { position: relative; z-index: 2; }
+        
+        .ach-text-content {
+            flex: 1;
+            min-width: 0;
+            overflow-wrap: anywhere;
+            word-wrap: break-word;
+        }
+        
+        .ach-card .cert-badge {
+            flex-shrink: 0;
+            width: 160px;
+            height: 160px;
+            margin-top: 8px;
+        }
+
+        .ach-card.hksmsa .ach-text-content p {
+            line-height: 1.75;
+        }
+
+        .ach-card.hksmsa .hksmsa-year {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+        
+        .ach-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 16px 40px rgba(49, 203, 0, 0.18);
         }
@@ -430,6 +493,7 @@
     <div class="section" id="profile">
         <div id="profile-text" style="font-size: 1.45rem; line-height: 2; max-width: 720px; color: var(--ghost-white);" data-i18n="profile_text">
             • –｛ ENTP-T || DWARF || 🇭🇰 Hong Kong ｝– •<br><br>
+            ℂ𝕒𝕟𝕥𝕠𝕟𝕖𝕤𝕖 - 𝔼𝕟𝕘𝕝𝕚𝕤𝕙 - 𝕄𝕒𝕟𝕕𝕒𝕣𝕚𝕟 - 𝕀𝕥𝕒𝕝𝕚𝕒𝕟<br><br>
             ᴜɴ ᴛᴜᴛᴛᴏꜰᴀʀᴇ, ᴍᴀ ɴᴏɴ ᴇ̀ ᴇꜱᴘᴇʀᴛᴏ ᴅɪ ɴᴜʟʟᴀ.
         </div>
     </div>
@@ -554,6 +618,66 @@
     </div>
 
     <div class="separator">-ˋˏ✄════════════════════════</div>
+
+    <div class="section" id="achievements">
+        <h1 style="font-size: 2.4rem; text-align: center; color: var(--lime-green);">Achievements</h1>
+        <div class="ach-card" style="--card-opacity: 0.84;">
+            <div class="ach-text-content">
+                <div class="project-title">Introduction to Cybersecurity</div>
+                <p>Cisco verifies the earner of this badge successfully completed the Introduction to Cybersecurity course. The holder of this student-level credential has introductory knowledge of cybersecurity, including the global implications of cyber threats on industries, and why cybersecurity is a growing profession. They understand vulnerabilities and threat detection and defense. They also have insight into opportunities available with pursuing cybersecurity certifications.</p>
+            </div>
+            <img src="itc.png" alt="Certificate Badge" class="cert-badge">
+        </div>
+        <div class="ach-card" style="--card-opacity: 0.82;">
+            <div class="ach-text-content">
+                <div class="project-title">Networking Devices and Initial Configuration</div>
+                <p>Cisco verifies the earner of this badge successfully completed the Networking Devices and Initial Configuration course and achieved this student level credential. Earner learned characteristics and benefits of cloud and virtualization, explored how to provide Internet Protocol (IP) addresses to devices, calculate an IP addressing scheme, configured Cisco devices to create a small network and tested for connectivity issues. Participated in up to 7 labs and 12 Cisco Packet Tracer activities.</p>
+            </div>
+            <img src="ndaic.png" alt="Certificate Badge" class="cert-badge">
+        </div>
+        <div class="ach-card" style="--card-opacity: 0.84;">
+            <div class="ach-text-content">
+                <div class="project-title">Computer Hardware Basics</div>
+                <p>Cisco verifies the earner of this badge successfully completed the Computer Hardware Basics course and achieved this student level credential. Earner has fundamentals knowledge of computers and mobile devices, how they work, as well as the basic concepts and skills needed to install components to build, repair, upgrade personal computers and and basic troubleshooting tools and techniques.</p>
+            </div>
+            <img src="chb.png" alt="Certificate Badge" class="cert-badge">
+        </div>
+        <div class="ach-card" style="--card-opacity: 0.82;">
+            <div class="ach-text-content">
+                <div class="project-title">
+Microsoft Office Specialist: PowerPoint Associate (Office 2019)</div>
+                <p>Microsoft PowerPoint certification earners have a fundamental understanding of the PowerPoint environment and demonstrate the correct application of PowerPoint. They are able to create, edit, and enhance PowerPoint presentations, including those for professional grade sales presentations, employee training, instructional materials, and kiosk slideshows. Earners may include business professionals, students, public speakers, sales, marketing staff, and educators.</p>
+            </div>
+            <img src="mospp.png" alt="Certificate Badge" class="cert-badge">
+        </div>
+            <div class="ach-card hksmsa" style="--card-opacity: 0.82;">
+            <div class="ach-text-content">
+                <div class="project-title">Hong Kong Schools Music and Speech Association</div>
+                <p><span class="hksmsa-year">2026</span><br />✧ Woodwind Ensemble: Woodwind Ensemble &ndash; Secondary School &ndash; Senior<br />✧ Orchestra: [Symphony Orchestra &ndash; Secondary School &ndash; Senior]<br />✧ Public Speaking: [Public Speaking Team &ndash; Secondary School &ndash; Senior]</p>
+                <p><span class="hksmsa-year">2025</span><br />✧ Woodwind Ensemble: Woodwind Ensemble &ndash; Secondary School &ndash; Senior<br />✧ Orchestra: Symphony Orchestra &ndash; Secondary School &ndash; Senior<br />✧ Public Speaking: Public Speaking Team &ndash; Secondary School &ndash; Senior</p>
+                <p><span class="hksmsa-year">2024</span><br />✧ Woodwind Ensemble: Woodwind Ensemble &ndash; Secondary School &ndash; Intermediate<br />✧ Orchestra: Symphony Orchestra &ndash; Secondary School &ndash; Intermediate</p>
+                <p><span class="hksmsa-year">2023</span><br />✧ Woodwind Ensemble: Woodwind Ensemble &ndash; Secondary School &ndash; Junior<br />✧ Orchestra: Symphony Orchestra &ndash; Secondary School &ndash; Intermediate<br />✧ Public Speaking: Public Speaking Team &ndash; Secondary School &ndash; Intermediate</p>
+                <p><span class="hksmsa-year">2022</span><br />✧ Woodwind Ensemble: Woodwind Ensemble &ndash; Secondary School &ndash; Junior<br />✧ Orchestra: Symphony Orchestra &ndash; Secondary School &ndash; Intermediate<br />✧ Public Speaking: Public Speaking Team &ndash; Secondary School &ndash; Junior</p>
+            </div>
+            <img src="hksmsa.png" alt="Certificate Badge" class="cert-badge">
+        </div>
+        <div class="ach-card" style="--card-opacity: 0.82;">
+            <div class="ach-text-content">
+                <div class="project-title">Joint School Music Competition - Symphony Orchestra</div>
+                <p>✧&nbsp;2026 Secondary School Symphony Orchestra (Class JSS991A)<br />✧&nbsp;2025 Secondary School Symphony Orchestra (Class JSS991A)<br />✧&nbsp;2024 Secondary School Symphony Orchestra (Class JSS991A)<br />✧&nbsp;2023 Secondary School Symphony Orchestra (Class JSS991A)</p>
+            </div>
+            <img src="jsma.png" alt="Certificate Badge" class="cert-badge">
+        </div>
+        <div class="ach-card" style="--card-opacity: 0.82;">
+            <div class="ach-text-content">
+                <div class="project-title">STEM+E Consortium 2026</div>
+                <p>The STEM+E Competition 2026, organized by the STEM+E Consortium, engages Hong Kong secondary students in applying STEM knowledge and entrepreneurial skills to solve real-world ESG challenges. Spanning several months, the competition features workshops, a day camp at Hong Kong Science Park, mentoring sessions, and a grand finale at Cyberport to foster innovation.</p>
+            </div>
+            <img src="steam+e.png" alt="Certificate Badge" class="cert-badge">
+        </div>
+        <div class="separator">I have a lot more achievements but they are either too lame to be displayed here or just too boring</div>
+    </div>  
+    <div class="separator">-ˋˏ✄════════════════════════</div>
     
     <div class="section" id="closing">
         <div class="closing" data-i18n="closing_text">
@@ -566,289 +690,280 @@
     </div>
 
     <script>
-        // Elements
-        const cursor = document.getElementById('custom-cursor');
-        const topBar = document.getElementById('top-bar');
-        const bg1 = document.getElementById('full-background');
-        const bg2 = document.getElementById('full-background2');
-        const overlay = document.getElementById('full-overlay');
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
+        const sparkle_cursor = document.getElementById('custom-cursor');
+        const floating_nav = document.getElementById('top-bar');
+        const dreamy_bg_one = document.getElementById('full-background');
+        const dreamy_bg_two = document.getElementById('full-background2');
+        const misty_layer = document.getElementById('full-overlay');
+        const particle_stage = document.getElementById('particle-canvas');
+        const drawing_tool = particle_stage.getContext('2d');
 
-        // Cursor Logic
-        let mouseX = 0;
-        let mouseY = 0;
-        let cursorVisible = false;
+        let pointer_x = 0;
+        let pointer_y = 0;
+        let cursor_shown = false;
 
         document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursor.style.left = `${mouseX}px`;
-            cursor.style.top = `${mouseY}px`;
-            if (!cursorVisible) {
-                cursor.style.display = 'block';
-                cursorVisible = true;
+            pointer_x = e.clientX;
+            pointer_y = e.clientY;
+            sparkle_cursor.style.left = `${pointer_x}px`;
+            sparkle_cursor.style.top = `${pointer_y}px`;
+            if (!cursor_shown) {
+                sparkle_cursor.style.display = 'block';
+                cursor_shown = true;
             }
         });
 
         document.addEventListener('mousedown', () => {
-            cursor.style.transform = 'scale(0.8)';
+            sparkle_cursor.style.transform = 'scale(0.8)';
         });
 
         document.addEventListener('mouseup', () => {
-            cursor.style.transform = 'scale(1)';
+            sparkle_cursor.style.transform = 'scale(1)';
         });
 
-        // Time Update Logic
-        function updateLocalTime() {
-            const now = new Date();
-            const utc8Time = new Date(now.getTime() + (8 * 60 * 60 * 1000)); // Add 8 hours for UTC+8
-            const timeString = utc8Time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
-            document.getElementById('local-time').textContent = timeString;
+        function refresh_time_display() {
+            const current_moment = new Date();
+            const hongkong_time = new Date(current_moment.getTime() + (8 * 60 * 60 * 1000));
+            const time_text = hongkong_time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
+            document.getElementById('local-time').textContent = time_text;
         }
-        updateLocalTime();
-        setInterval(updateLocalTime, 1000);
+        refresh_time_display();
+        setInterval(refresh_time_display, 1000);
 
-        // Top Bar Visibility Logic
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
-                topBar.classList.add('active');
-            } else if (mouseY < 100) {
-                topBar.classList.add('active');
+                floating_nav.classList.add('active');
+            } else if (pointer_y < 100) {
+                floating_nav.classList.add('active');
             } else {
-                topBar.classList.remove('active');
+                floating_nav.classList.remove('active');
             }
         });
 
         document.addEventListener('mousemove', (e) => {
             if (window.scrollY > 100) {
-                topBar.classList.add('active');
+                floating_nav.classList.add('active');
             } else if (e.clientY < 100) {
-                topBar.classList.add('active');
+                floating_nav.classList.add('active');
             } else {
-                topBar.classList.remove('active');
+                floating_nav.classList.remove('active');
             }
         });
 
-        // Background System
-        let currentBgElement = bg1;
-        let nextBgElement = bg2;
-        let currentImage = null;
-        let firstBgSet = false;
+        let active_scene = dreamy_bg_one;
+        let upcoming_scene = dreamy_bg_two;
+        let current_scene_image = null;
+        let initial_scene_set = false;
 
-        const sectionMap = {
+        const scene_map = {
             'intro':            { image: null, opacity: 1 },
-            'profile':          { image: 'b1.png', opacity: 0 },
+            'profile':          { image: 'b1.png', opacity: 0.2 },
             'about-me':         { image: 'b2.png', opacity: 0.7 },
             'minecraft':        { image: 'b3.png', opacity: 0.7 },
             'current-projects': { image: 'b5.png', opacity: 0.9 },
             'past-aniani':      { image: 'b6.png', opacity: 0.9 },
+            'achievements':     { image: null, opacity: 0.9 },
             'closing':          { image: null, opacity: 1 }
         };
 
-        // Preload all background images at page load
-        function preloadBackgroundImages(urls) {
-            urls.forEach(url => {
-                const img = new Image();
-                img.src = url;
+        function load_scene_images(image_paths) {
+            image_paths.forEach(image_path => {
+                const image_item = new Image();
+                image_item.src = image_path;
             });
         }
 
-        preloadBackgroundImages([
+        load_scene_images([
             'b1.png', 'b2.png', 'b3.png', 'b5.png', 'b6.png',
             'p1.png', 'p2.png', 'p3.png'
         ]);
 
-        function setBackground(filename, opacity) {
-            if (currentImage === filename) return;
-            if (!filename) {
-                bg1.style.opacity = '0';
-                bg2.style.opacity = '0';
-                currentImage = null;
+        function switch_scene(image_name, transparency_level) {
+            if (current_scene_image === image_name) return;
+            if (!image_name) {
+                dreamy_bg_one.style.opacity = '0';
+                dreamy_bg_two.style.opacity = '0';
+                current_scene_image = null;
                 return;
             }
-            const newUrl = `${filename}`;
-            [currentBgElement, nextBgElement] = [nextBgElement, currentBgElement];
-            nextBgElement.style.backgroundImage = `url('${newUrl}')`;
+            const new_image_path = `${image_name}`;
+            [active_scene, upcoming_scene] = [upcoming_scene, active_scene];
+            upcoming_scene.style.backgroundImage = `url('${new_image_path}')`;
 
-            if (!firstBgSet) {
-                const prevNextTransition = nextBgElement.style.transition;
-                const prevCurrentTransition = currentBgElement.style.transition;
-                const prevOverlayTransition = overlay.style.transition;
+            if (!initial_scene_set) {
+                const prev_upcoming_transition = upcoming_scene.style.transition;
+                const prev_active_transition = active_scene.style.transition;
+                const prev_misty_transition = misty_layer.style.transition;
 
-                nextBgElement.style.transition = 'none';
-                currentBgElement.style.transition = 'none';
-                overlay.style.transition = 'none';
+                upcoming_scene.style.transition = 'none';
+                active_scene.style.transition = 'none';
+                misty_layer.style.transition = 'none';
 
-                nextBgElement.style.opacity = '1';
-                currentBgElement.style.opacity = '0';
-                overlay.style.backgroundColor = `rgba(248, 248, 255, ${opacity})`;
+                upcoming_scene.style.opacity = '1';
+                active_scene.style.opacity = '0';
+                misty_layer.style.backgroundColor = `rgba(248, 248, 255, ${transparency_level})`;
 
                 requestAnimationFrame(() => {
-                    nextBgElement.style.transition = prevNextTransition || 'opacity 0.85s ease';
-                    currentBgElement.style.transition = prevCurrentTransition || 'opacity 0.85s ease';
-                    overlay.style.transition = prevOverlayTransition || 'background-color 0.85s ease';
+                    upcoming_scene.style.transition = prev_upcoming_transition || 'opacity 0.85s ease';
+                    active_scene.style.transition = prev_active_transition || 'opacity 0.85s ease';
+                    misty_layer.style.transition = prev_misty_transition || 'background-color 0.85s ease';
                 });
 
-                firstBgSet = true;
+                initial_scene_set = true;
             } else {
-                nextBgElement.style.opacity = '1';
-                overlay.style.backgroundColor = `rgba(248, 248, 255, ${opacity})`;
-                currentBgElement.style.opacity = '0';
+                upcoming_scene.style.opacity = '1';
+                misty_layer.style.backgroundColor = `rgba(248, 248, 255, ${transparency_level})`;
+                active_scene.style.opacity = '0';
             }
 
-            currentImage = filename;
+            current_scene_image = image_name;
         }
 
-        const mainSections = ['intro', 'profile', 'about-me', 'minecraft', 'current-projects', 'past-aniani', 'closing'];
+        const key_sections = ['intro', 'profile', 'about-me', 'minecraft', 'current-projects', 'past-aniani', 'achievements', 'closing'];
 
-        function updateBackgroundByViewportCenter() {
-            const centerY = window.scrollY + window.innerHeight / 2;
-            let activeSection = null;
+        function adjust_scene_by_view() {
+            const viewport_center_y = window.scrollY + window.innerHeight / 2;
+            let highlighted_section = null;
 
-            for (const id of mainSections) {
-                const section = document.getElementById(id);
-                if (!section) continue;
-                const rect = section.getBoundingClientRect();
-                const top = window.scrollY + rect.top;
-                const bottom = top + rect.height;
+            for (const id of key_sections) {
+                const page_section = document.getElementById(id);
+                if (!page_section) continue;
+                const section_bounds = page_section.getBoundingClientRect();
+                const section_top = window.scrollY + section_bounds.top;
+                const section_bottom = section_top + section_bounds.height;
 
-                if (centerY >= top && centerY <= bottom) {
-                    activeSection = id;
+                if (viewport_center_y >= section_top && viewport_center_y <= section_bottom) {
+                    highlighted_section = id;
                     break;
                 }
             }
 
-            if (!activeSection) {
-                // fallback: most visible section by intersection area
-                let best = null;
-                let bestRatio = -1;
-                for (const id of mainSections) {
-                    const section = document.getElementById(id);
-                    if (!section) continue;
-                    const rect = section.getBoundingClientRect();
-                    const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
-                    const ratio = rect.height > 0 ? visibleHeight / rect.height : 0;
-                    if (ratio > bestRatio) {
-                        bestRatio = ratio;
-                        best = id;
+            if (!highlighted_section) {
+                let top_candidate = null;
+                let best_visibility = -1;
+                for (const id of key_sections) {
+                    const page_section = document.getElementById(id);
+                    if (!page_section) continue;
+                    const section_bounds = page_section.getBoundingClientRect();
+                    const visible_part = Math.max(0, Math.min(section_bounds.bottom, window.innerHeight) - Math.max(section_bounds.top, 0));
+                    const visibility_ratio = section_bounds.height > 0 ? visible_part / section_bounds.height : 0;
+                    if (visibility_ratio > best_visibility) {
+                        best_visibility = visibility_ratio;
+                        top_candidate = id;
                     }
                 }
-                activeSection = best;
+                highlighted_section = top_candidate;
             }
 
-            if (activeSection) {
-                const config = sectionMap[activeSection];
-                if (config) setBackground(config.image, config.opacity);
+            if (highlighted_section) {
+                const section_config = scene_map[highlighted_section];
+                if (section_config) switch_scene(section_config.image, section_config.opacity);
             }
         }
 
-        window.addEventListener('scroll', updateBackgroundByViewportCenter);
-        window.addEventListener('resize', updateBackgroundByViewportCenter);
-        updateBackgroundByViewportCenter();
+        window.addEventListener('scroll', adjust_scene_by_view);
+        window.addEventListener('resize', adjust_scene_by_view);
+        adjust_scene_by_view();
 
-        // ==================== PARTICLE SYSTEM ====================
-        let particles = [];
-        let w, h;
-        let pImage = new Image();
-        pImage.src = 'l1.png';
+        let floating_dots = [];
+        let stage_width, stage_height;
+        let sparkle_image = new Image();
+        sparkle_image.src = 'l1.png';
 
-        function shouldShowParticles() {
-            const scrollY = window.scrollY;
-            const winH = window.innerHeight;
-            const docH = document.documentElement.scrollHeight;
-            return (scrollY < winH * 0.65) || ((scrollY + winH) > (docH - winH * 0.65));
+        function particles_needed() {
+            const scroll_position = window.scrollY;
+            const window_height = window.innerHeight;
+            const document_height = document.documentElement.scrollHeight;
+            return (scroll_position < window_height * 0.65) || ((scroll_position + window_height) > (document_height - window_height * 0.65));
         }
 
-        function updateParticlesVisibility() {
-            canvas.style.opacity = shouldShowParticles() ? '0.9' : '0';
+        function toggle_particles() {
+            particle_stage.style.opacity = particles_needed() ? '0.9' : '0';
         }
 
-        window.addEventListener('scroll', updateParticlesVisibility);
-        window.addEventListener('resize', updateParticlesVisibility);
+        window.addEventListener('scroll', toggle_particles);
+        window.addEventListener('resize', toggle_particles);
 
-        updateParticlesVisibility(); // Set initial visibility
+        toggle_particles();
 
-        class Particle {
-            constructor() { this.reset(); }
-            reset() {
-                this.x = Math.random() * w;
-                this.y = Math.random() * h * 1.4;
-                this.vx = (Math.random() - 0.5) * 1.5;
-                this.vy = 1.5 + Math.random() * 2.5;
-                this.size = 8 + Math.random() * 22;
-                this.alpha = 0;
-                this.targetAlpha = 0.4 + Math.random() * 0.55;
-                this.rotation = Math.random() * Math.PI * 2;
-                this.rotSpeed = (Math.random() - 0.5) * 0.08;
-                this.color = ['#31CB00', '#8FFF6E', '#C1FFC0'][Math.floor(Math.random() * 3)];
-                // Removed 'note' from the pool
-                this.type = Math.random() < 0.3 ? 'p' : ['circle', 'square', 'triangle'][Math.floor(Math.random() * 3)];
-                this.life = 350 + Math.random() * 300;
+        class FloatingDot {
+            constructor() { this.rebirth(); }
+            rebirth() {
+                this.pos_x = Math.random() * stage_width;
+                this.pos_y = Math.random() * stage_height * 1.4;
+                this.vel_x = (Math.random() - 0.5) * 1.5;
+                this.vel_y = 1.5 + Math.random() * 2.5;
+                this.scale = 8 + Math.random() * 22;
+                this.opacity = 0;
+                this.target_opacity = 0.4 + Math.random() * 0.55;
+                this.spin = Math.random() * Math.PI * 2;
+                this.spin_speed = (Math.random() - 0.5) * 0.08;
+                this.hue = ['#31CB00', '#8FFF6E', '#C1FFC0'][Math.floor(Math.random() * 3)];
+                this.shape = Math.random() < 0.3 ? 'sparkle' : ['circle', 'square', 'triangle'][Math.floor(Math.random() * 3)];
+                this.duration = 350 + Math.random() * 300;
             }
-            update() {
-                let dx = this.x - mouseX;
-                let dy = this.y - mouseY;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < 180) {
-                    let force = (180 - distance) / 180;
-                    this.vx += (dx / distance) * force * 1.2;
-                    this.vy += (dy / distance) * force * 1.2;
+            evolve() {
+                let delta_x = this.pos_x - pointer_x;
+                let delta_y = this.pos_y - pointer_y;
+                let gap = Math.sqrt(delta_x * delta_x + delta_y * delta_y);
+                if (gap < 180) {
+                    let pull_strength = (180 - gap) / 180;
+                    this.vel_x += (delta_x / gap) * pull_strength * 1.2;
+                    this.vel_y += (delta_y / gap) * pull_strength * 1.2;
                 }
-                this.x += this.vx; this.y += this.vy;
-                this.vx *= 0.94; this.vy *= 0.94; this.vy += 0.08;
-                this.rotation += this.rotSpeed;
-                if (this.alpha < this.targetAlpha) this.alpha += 0.025;
-                this.alpha -= 0.003;
-                this.life--;
-                if (this.life <= 0 || this.alpha < 0.02 || this.y > h + 200) this.reset();
+                this.pos_x += this.vel_x; this.pos_y += this.vel_y;
+                this.vel_x *= 0.94; this.vel_y *= 0.94; this.vel_y += 0.08;
+                this.spin += this.spin_speed;
+                if (this.opacity < this.target_opacity) this.opacity += 0.025;
+                this.opacity -= 0.003;
+                this.duration--;
+                if (this.duration <= 0 || this.opacity < 0.02 || this.pos_y > stage_height + 200) this.rebirth();
             }
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.rotation);
-                ctx.fillStyle = this.color;
-                if (this.type === 'p' && pImage.complete) {
-                    ctx.drawImage(pImage, -this.size / 1.7, -this.size / 1.7, this.size * 1.3, this.size * 1.3);
-                } else if (this.type === 'circle') {
-                    ctx.beginPath(); ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2); ctx.fill();
-                } else if (this.type === 'square') {
-                    ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
-                } else if (this.type === 'triangle') {
-                    // Equilateral Triangle Math
-                    const r = this.size / 2;
-                    ctx.beginPath();
-                    ctx.moveTo(0, -r); // Top point
-                    ctx.lineTo(r * 0.866, r * 0.5); // Bottom right (cos 30°, sin 30°)
-                    ctx.lineTo(-r * 0.866, r * 0.5); // Bottom left
-                    ctx.closePath();
-                    ctx.fill();
+            render() {
+                drawing_tool.save();
+                drawing_tool.globalAlpha = this.opacity;
+                drawing_tool.translate(this.pos_x, this.pos_y);
+                drawing_tool.rotate(this.spin);
+                drawing_tool.fillStyle = this.hue;
+                if (this.shape === 'sparkle' && sparkle_image.complete) {
+                    drawing_tool.drawImage(sparkle_image, -this.scale / 1.7, -this.scale / 1.7, this.scale * 1.3, this.scale * 1.3);
+                } else if (this.shape === 'circle') {
+                    drawing_tool.beginPath(); drawing_tool.arc(0, 0, this.scale / 2, 0, Math.PI * 2); drawing_tool.fill();
+                } else if (this.shape === 'square') {
+                    drawing_tool.fillRect(-this.scale / 2, -this.scale / 2, this.scale, this.scale);
+                } else if (this.shape === 'triangle') {
+                    const r = this.scale / 2;
+                    drawing_tool.beginPath();
+                    drawing_tool.moveTo(0, -r);
+                    drawing_tool.lineTo(r * 0.866, r * 0.5);
+                    drawing_tool.lineTo(-r * 0.866, r * 0.5);
+                    drawing_tool.closePath();
+                    drawing_tool.fill();
                 }
-                ctx.restore();
+                drawing_tool.restore();
             }
         }
 
-        function resizeCanvas() {
-            w = window.innerWidth; h = window.innerHeight;
-            canvas.width = w; canvas.height = h;
+        function adjust_stage() {
+            stage_width = window.innerWidth; stage_height = window.innerHeight;
+            particle_stage.width = stage_width; particle_stage.height = stage_height;
         }
 
-        function animate() {
-            ctx.clearRect(0, 0, w, h);
-            if (particles.length < 140) {
-                for (let i = 0; i < 6; i++) particles.push(new Particle());
+        function bring_to_life() {
+            drawing_tool.clearRect(0, 0, stage_width, stage_height);
+            if (floating_dots.length < 140) {
+                for (let i = 0; i < 6; i++) floating_dots.push(new FloatingDot());
             }
-            for (let i = particles.length - 1; i >= 0; i--) {
-                particles[i].update();
-                particles[i].draw();
+            for (let i = floating_dots.length - 1; i >= 0; i--) {
+                floating_dots[i].evolve();
+                floating_dots[i].render();
             }
-            requestAnimationFrame(animate);
+            requestAnimationFrame(bring_to_life);
         }
 
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-        animate();
+        window.addEventListener('resize', adjust_stage);
+        adjust_stage();
+        bring_to_life();
     </script>
 </body>
 </html>
